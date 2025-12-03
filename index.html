@@ -179,10 +179,11 @@
     }
 
     .qty-input {
-      width: 50px;
-      padding: 0.3em;
+      width: 60px;
+      padding: 0.4em;
       text-align: center;
-      margin-top: 1em;
+      margin-top: 0.6em;
+      font-size: 1em;
     }
 
     .modal-footer button {
@@ -202,6 +203,20 @@
       background: #0a1a2f;
       color: white;
       margin-top: 4em;
+    }
+
+    label {
+      display: block;
+      margin-top: 1em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    select {
+      padding: 0.4em;
+      font-size: 1em;
+      border-radius: 4px;
+      margin-top: 0.4em;
     }
   </style>
 </head>
@@ -229,7 +244,7 @@
 
 <h2 class="section-header">Top Research Products</h2>
 <section class="products">
-  <div class="product-card" data-name="Tirz 10mg" data-price="55.00" data-img="https://i.imgur.com/Hgzs2M2.jpeg" data-desc="High-purity 10mg peptide for research use only.">
+  <div class="product-card" data-name="Tirz 10mg" data-price="55.00" data-img="https://i.imgur.com/Hgzs2M2.jpeg" data-desc="High-purity 10mg peptide for research use only." data-dosages="5mg,10mg,20mg">
     <img src="https://i.imgur.com/Hgzs2M2.jpeg" alt="Tirzepatide">
     <h3>Tirz 10mg</h3>
     <p>99% Purity • Research Use Only</p>
@@ -237,27 +252,11 @@
     <button class="quick-view">Quick View</button>
   </div>
 
-  <div class="product-card" data-name="NAD+ 100mg" data-price="49.99" data-img="https://i.imgur.com/ejyxJlj.jpeg" data-desc="Research-grade NAD+ 100mg. High-purity, lab-ready compound.">
+  <div class="product-card" data-name="NAD+ 100mg" data-price="49.99" data-img="https://i.imgur.com/ejyxJlj.jpeg" data-desc="Research-grade NAD+ 100mg. High-purity, lab-ready compound." data-dosages="100mg,200mg">
     <img src="https://i.imgur.com/ejyxJlj.jpeg" alt="NAD+">
     <h3>NAD+ 100mg</h3>
     <p>99% Purity • Research Use Only</p>
     <p class="price">$49.99</p>
-    <button class="quick-view">Quick View</button>
-  </div>
-
-  <div class="product-card" data-name="BPC-157 5mg" data-price="39.00" data-img="https://i.imgur.com/LhDxZoX.jpeg" data-desc="BPC-157 peptide 5mg for research-grade applications.">
-    <img src="https://i.imgur.com/LhDxZoX.jpeg" alt="BPC-157">
-    <h3>BPC-157 5mg</h3>
-    <p>99% Purity • For Lab Use</p>
-    <p class="price">$39.00</p>
-    <button class="quick-view">Quick View</button>
-  </div>
-
-  <div class="product-card" data-name="Semaglutide 2mg" data-price="75.00" data-img="https://i.imgur.com/1dsOkZa.jpeg" data-desc="Semaglutide 2mg • Research Purposes Only.">
-    <img src="https://i.imgur.com/1dsOkZa.jpeg" alt="Semaglutide">
-    <h3>Semaglutide 2mg</h3>
-    <p>99% Purity • Scientific Use Only</p>
-    <p class="price">$75.00</p>
     <button class="quick-view">Quick View</button>
   </div>
 </section>
@@ -270,7 +269,13 @@
     <h3 id="modal-title"></h3>
     <p id="modal-desc"></p>
     <p class="price" id="modal-price"></p>
-    <input type="number" class="qty-input" value="1" min="1">
+
+    <label for="dosage-select">Dosage:</label>
+    <select id="dosage-select" class="qty-input"></select>
+
+    <label for="modal-qty">Quantity:</label>
+    <input type="number" id="modal-qty" class="qty-input" value="1" min="1">
+
     <div class="modal-footer">
       <button onclick="alert('Added to cart (demo only)')">Add to Cart</button>
     </div>
@@ -287,6 +292,7 @@
   const modalTitle = document.getElementById('modal-title');
   const modalDesc = document.getElementById('modal-desc');
   const modalPrice = document.getElementById('modal-price');
+  const dosageSelect = document.getElementById('dosage-select');
 
   document.querySelectorAll('.quick-view').forEach(button => {
     button.addEventListener('click', () => {
@@ -295,6 +301,12 @@
       modalPrice.textContent = `$${card.dataset.price}`;
       modalDesc.textContent = card.dataset.desc;
       modalImg.src = card.dataset.img;
+
+      const dosages = card.dataset.dosages ? card.dataset.dosages.split(',') : ['Default'];
+      dosageSelect.innerHTML = dosages.map(d => `<option value="${d}">${d}</option>`).join('');
+
+      document.getElementById('modal-qty').value = 1;
+
       modal.style.display = 'flex';
     });
   });
@@ -310,4 +322,3 @@
 
 </body>
 </html>
-
