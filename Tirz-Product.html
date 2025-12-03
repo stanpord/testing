@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirz 10mg – SBS LABS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="image-box">
+    <img src="https://i.imgur.com/Hgzs2M2.jpeg" alt="Tirz 10mg Vial">
+  </div>
+
+  <div class="details">
+    <h2>Tirz 10 mg</h2>
+    <p>High‑purity research peptide for laboratory applications. Not for human consumption.</p>
+
+    <p class="price">$55.00</p>
+    <button class="button" onclick="addToCart('Tirz 10mg', 55.00)">Add to Cart</button>
+
+    <div class="section-divider">Specifications</div>
+    <ul>
+      <li>Purity: 99%</li>
+      <li>Form: Lyophilized Peptide (Powder)</li>
+      <li>Quantity: 10 mg per vial</li>
+      <li>Storage: 2–8 °C recommended</li>
+      <li>For research use only</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<div id="snackbar" class="snackbar">Added to cart</div>
+
+<script>
+  function getCart() {
+    return JSON.parse(localStorage.getItem('sbsCart') || '{}');
+  }
+  function saveCart(cart) {
+    localStorage.setItem('sbsCart', JSON.stringify(cart));
+  }
+  function updateCartCount() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce((a, b) => a + b.qty, 0);
+    document.getElementById('cart-count').innerText = count;
+  }
+  function addToCart(name, price) {
+    const cart = getCart();
+    cart[name] = cart[name] ? { qty: cart[name].qty + 1, price } : { qty: 1, price };
+    saveCart(cart);
+    updateCartCount();
+    const sb = document.getElementById('snackbar');
+    sb.style.display = 'block';
+    setTimeout(() => sb.style.display = 'none', 1500);
+  }
+  updateCartCount();
+</script>
+
+</body>
+</html>

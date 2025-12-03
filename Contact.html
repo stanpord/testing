@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – SBS LABS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="about.html">About</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Contact Us</h2>
+  <p>If you have questions about our products or need support with an order, feel free to reach out:</p>
+  <div style="background: var(--light-bg); padding: 1.5em 2em; border-radius: 8px; margin-top: 1em;">
+    <p><strong>Email:</strong> <a href="mailto:support@sbslabs.com">support@sbslabs.com</a></p>
+    <p><strong>Business Hours:</strong> Monday – Friday, 9 AM – 5 PM (EST)</p>
+    <p><strong>Location:</strong> SBS LABS (Virtual HQ)</p>
+  </div>
+</div>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+  function getCart() { return JSON.parse(localStorage.getItem('sbsCart') || '{}'); }
+  function updateCartCount() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce((a, b) => a + b.qty, 0);
+    const el = document.getElementById('cart-count');
+    if (el) el.innerText = count;
+  }
+  updateCartCount();
+</script>
+
+</body>
+</html>
+

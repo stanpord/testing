@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Peptides – SBS LABS</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5em 2em;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #0a1a2f;
+    }
+    nav a {
+      margin-left: 1.5em;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .section-header {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 1.5em;
+      color: #0a1a2f;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+      padding: 2em;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 240px;
+      padding: 1.2em;
+      text-align: center;
+      background: #fff;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-card img {
+      width: 100px;
+      border-radius: 4px;
+      margin-bottom: 0.6em;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #0a1a2f;
+      margin: 0.3em 0;
+    }
+
+    .qty-input {
+      width: 50px;
+      padding: 0.3em;
+      text-align: center;
+      margin-bottom: 0.6em;
+    }
+
+    .button {
+      background: #0a1a2f;
+      color: white;
+      padding: 0.6em 1.4em;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #003366;
+    }
+
+    footer {
+      margin-top: 4em;
+      text-align: center;
+      padding: 2em;
+      background: #0a1a2f;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<h2 class="section-header">Order Research Peptides</h2>
+
+<section class="products">
+  <div class="product-card">
+    <img src="https://i.imgur.com/Hgzs2M2.jpeg" alt="Tirzepatide">
+    <h3>Tirzepatide 10mg</h3>
+    <p class="price">$55.00</p>
+    <input type="number" id="qty1" class="qty-input" value="1" min="1">
+    <button class="button" onclick="addToCart('Tirzepatide 10mg', 55.00, 'qty1')">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://i.imgur.com/ejyxJlj.jpeg" alt="NAD+">
+    <h3>NAD+ 100mg</h3>
+    <p class="price">$49.99</p>
+    <input type="number" id="qty2" class="qty-input" value="1" min="1">
+    <button class="button" onclick="addToCart('NAD+ 100mg', 49.99, 'qty2')">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://i.imgur.com/TVjlWob.jpeg" alt="BPC-157">
+    <h3>BPC-157 5mg</h3>
+    <p class="price">$39.00</p>
+    <input type="number" id="qty3" class="qty-input" value="1" min="1">
+    <button class="button" onclick="addToCart('BPC-157 5mg', 39.00, 'qty3')">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="https://i.imgur.com/I9X7rYl.jpeg" alt="Semaglutide">
+    <h3>Semaglutide 2mg</h3>
+    <p class="price">$75.00</p>
+    <input type="number" id="qty4" class="qty-input" value="1" min="1">
+    <button class="button" onclick="addToCart('Semaglutide 2mg', 75.00, 'qty4')">Add to Cart</button>
+  </div>
+</section>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+  function getCart() {
+    return JSON.parse(localStorage.getItem('sbsCart') || '{}');
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('sbsCart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce((a, b) => a + b.qty, 0);
+    document.getElementById('cart-count').innerText = count;
+  }
+
+  function addToCart(name, price, qtyId) {
+    const qty = parseInt(document.getElementById(qtyId).value) || 1;
+    const cart = getCart();
+    if (cart[name]) {
+      cart[name].qty += qty;
+    } else {
+      cart[name] = { qty: qty, price };
+    }
+    saveCart(cart);
+    updateCartCount();
+    alert(`${qty} × ${name} added to cart`);
+  }
+
+  updateCartCount();
+</script>
+
+</body>
+</html>

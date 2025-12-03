@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SBS LABS – Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5em 2em;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    header h1 {
+      font-size: 1.6em;
+      color: #0a1a2f;
+      margin: 0;
+    }
+
+    nav a {
+      margin-left: 2em;
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #062e5c, #0a1a2f);
+      color: white;
+      padding: 4em 2em;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 2.8em;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      color: #e0e0e0;
+      margin-bottom: 1.5em;
+    }
+
+    .hero-buttons a {
+      padding: 0.8em 1.6em;
+      margin: 0 0.5em;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .primary-btn {
+      background: #ffffff;
+      color: #0a1a2f;
+    }
+
+    .secondary-btn {
+      border: 2px solid white;
+      color: white;
+      background: transparent;
+    }
+
+    .section-header {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 2em;
+      color: #0a1a2f;
+    }
+
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2em;
+      padding: 2em;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      width: 220px;
+      padding: 1.2em;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 1em;
+    }
+
+    .product-card h3 {
+      font-size: 1.1em;
+      margin: 0.5em 0;
+      color: #0a1a2f;
+    }
+
+    .product-card p {
+      margin: 0.2em 0;
+      color: #444;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #0a1a2f;
+      margin-top: 0.5em;
+    }
+
+    .quick-view {
+      margin-top: 0.8em;
+      padding: 0.6em 1.2em;
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .quick-view:hover {
+      background: #e6e6e6;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content img {
+      width: 100px;
+      margin-bottom: 1em;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.6em;
+      right: 1em;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .qty-input {
+      width: 50px;
+      padding: 0.3em;
+      text-align: center;
+      margin-top: 1em;
+    }
+
+    .modal-footer button {
+      margin-top: 1em;
+      padding: 0.6em 1.2em;
+      background: #0a1a2f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background: #0a1a2f;
+      color: white;
+      margin-top: 4em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (0)</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>ORDER RESEARCH PEPTIDES</h2>
+  <p>High-purity compounds for scientific research. Fast, secure, and discreet.</p>
+  <div class="hero-buttons">
+    <a class="primary-btn" href="products.html">VIEW PRODUCTS</a>
+    <a class="secondary-btn" href="about.html">LEARN MORE</a>
+  </div>
+</section>
+
+<h2 class="section-header">Top Research Products</h2>
+<section class="products">
+  <div class="product-card" data-name="Tirz 10mg" data-price="55.00" data-img="https://i.imgur.com/Hgzs2M2.jpeg" data-desc="High-purity 10mg peptide for research use only.">
+    <img src="https://i.imgur.com/Hgzs2M2.jpeg" alt="Tirzepatide">
+    <h3>Tirz 10mg</h3>
+    <p>99% Purity • Research Use Only</p>
+    <p class="price">$55.00</p>
+    <button class="quick-view">Quick View</button>
+  </div>
+
+  <div class="product-card" data-name="NAD+ 100mg" data-price="49.99" data-img="https://i.imgur.com/ejyxJlj.jpeg" data-desc="Research-grade NAD+ 100mg. High-purity, lab-ready compound.">
+    <img src="https://i.imgur.com/ejyxJlj.jpeg" alt="NAD+">
+    <h3>NAD+ 100mg</h3>
+    <p>99% Purity • Research Use Only</p>
+    <p class="price">$49.99</p>
+    <button class="quick-view">Quick View</button>
+  </div>
+
+  <div class="product-card" data-name="BPC-157 5mg" data-price="39.00" data-img="https://i.imgur.com/LhDxZoX.jpeg" data-desc="BPC-157 peptide 5mg for research-grade applications.">
+    <img src="https://i.imgur.com/LhDxZoX.jpeg" alt="BPC-157">
+    <h3>BPC-157 5mg</h3>
+    <p>99% Purity • For Lab Use</p>
+    <p class="price">$39.00</p>
+    <button class="quick-view">Quick View</button>
+  </div>
+
+  <div class="product-card" data-name="Semaglutide 2mg" data-price="75.00" data-img="https://i.imgur.com/1dsOkZa.jpeg" data-desc="Semaglutide 2mg • Research Purposes Only.">
+    <img src="https://i.imgur.com/1dsOkZa.jpeg" alt="Semaglutide">
+    <h3>Semaglutide 2mg</h3>
+    <p>99% Purity • Scientific Use Only</p>
+    <p class="price">$75.00</p>
+    <button class="quick-view">Quick View</button>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <p class="price" id="modal-price"></p>
+    <input type="number" class="qty-input" value="1" min="1">
+    <div class="modal-footer">
+      <button onclick="alert('Added to cart (demo only)')">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalPrice = document.getElementById('modal-price');
+
+  document.querySelectorAll('.quick-view').forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.product-card');
+      modalTitle.textContent = card.dataset.name;
+      modalPrice.textContent = `$${card.dataset.price}`;
+      modalDesc.textContent = card.dataset.desc;
+      modalImg.src = card.dataset.img;
+      modal.style.display = 'flex';
+    });
+  });
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+</script>
+
+</body>
+</html>
+

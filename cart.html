@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart – SBS LABS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <p class="price" id="cart-total"></p>
+  <button class="button" onclick="checkout()">Proceed to Checkout</button>
+</div>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+  function getCart() {
+    return JSON.parse(localStorage.getItem('sbsCart') || '{}');
+  }
+  function saveCart(cart) {
+    localStorage.setItem('sbsCart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce((a, b) => a + b.qty, 0);
+    document.getElementById('cart-count').innerText = count;
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cart-items');
+    const totalDisplay = document.getElementById('cart-total');
+    container.innerHTML = '';
+    let total = 0;
+
+    if (!cart || Object.keys(cart).length === 0) {
+      container.innerHTML = '<p>Your cart is empty.</p>';
+      totalDisplay.innerText = '';
+      return;
+    }
+
+    for (let name in cart) {
+      const item = cart[name];
+      const itemTotal = item.qty * item.price;
+      total += itemTotal;
+
+      const div = document.createElement('div');
+      div.className = 'product-card'; /* reuse card style for consistency */
+      div.style.marginBottom = '1em';
+      div.innerHTML = `<p><strong>${name}</strong> (x${item.qty}) — $${itemTotal.toFixed(2)}</p>`;
+      container.appendChild(div);
+    }
+
+    totalDisplay.innerText = 'Total: $' + total.toFixed(2);
+  }
+
+  function checkout() {
+    alert('Checkout functionality not yet implemented. Integrate payment gateway for live orders.');
+  }
+
+  updateCartCount();
+  renderCart();
+</script>
+
+</body>
+</html>

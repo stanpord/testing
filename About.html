@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – SBS LABS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>SBS LABS</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>About SBS LABS</h2>
+  <p>SBS LABS was founded with the mission to supply high‑quality research peptides and compounds to the scientific community. We prioritize purity, transparency, and consistency in every batch.</p>
+
+  <p>Our lab team consists of experienced scientists and researchers, ensuring that each product is rigorously tested and validated. We’re committed to supporting research worldwide with reliable materials.</p>
+
+  <p><strong>Important Notice:</strong> All products sold by SBS LABS are strictly for research use only. They are not for human consumption or medical use.</p>
+</div>
+
+<footer>
+  © 2025 SBS LABS • Research Use Only • Not for Human Consumption
+</footer>
+
+<script>
+  function getCart() { return JSON.parse(localStorage.getItem('sbsCart') || '{}'); }
+  function updateCartCount() {
+    const cart = getCart();
+    const count = Object.values(cart).reduce((a, b) => a + b.qty, 0);
+    const el = document.getElementById('cart-count');
+    if (el) el.innerText = count;
+  }
+  updateCartCount();
+</script>
+
+</body>
+</html>
